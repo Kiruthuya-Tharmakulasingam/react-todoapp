@@ -9,6 +9,13 @@ function TodoApp() {
       alert('Please enter a task!')
       return
     }
+    const isDuplicate = todos.some(
+    (value) => value.trim().toLowerCase() === task.trim().toLowerCase()
+  )
+  if (isDuplicate) {
+    alert('Task already exists')
+    return
+  }
     setTodos([...todos, task])   
     setTask('')                  
   }
@@ -27,7 +34,7 @@ function TodoApp() {
           value={task}
           onChange={(e) => setTask(e.target.value)} style={styles.input}
         />
-        <button style={styles.addBtn} onClick={addTask}>
+        <button style={styles.addBtn} onClick={() => addTask(task)}>
           Add Task
         </button>
         <div>
